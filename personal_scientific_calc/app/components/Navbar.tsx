@@ -1,6 +1,5 @@
 import React from 'react';
 
-// Define TypeScript interface for session data
 interface Session {
   _id: string;
   calculation: string;
@@ -9,11 +8,10 @@ interface Session {
 }
 
 interface NavbarProps {
-  sessions: Session[]; // List of sessions
-  onSelectSession: (session: Session) => void; // Callback to handle session selection
+  sessions: Session[]; 
+  onSelectSession: (session: Session) => void; 
 }
 
-// Function to truncate text
 const truncateText = (text: string, length: number) => {
   return text.length > length ? `${text.slice(0, length)}...` : text;
 };

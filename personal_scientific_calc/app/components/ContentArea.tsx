@@ -1,11 +1,9 @@
 import React from 'react';
 
-// Define the props for the ContentArea component
 interface ContentAreaProps {
   selected: string;
 }
 
-// Define your components for different sections
 const Profile: React.FC = () => (
   <div>
     <h2>Profile</h2>
@@ -16,7 +14,6 @@ const Profile: React.FC = () => (
 const History: React.FC = () => (
   <div>
     <h2>History</h2>
-    {/* You can render a list of sessions here */}
     <p>This is the history section. Displaying old sessions here.</p>
   </div>
 );

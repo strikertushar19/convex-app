@@ -38,7 +38,10 @@ export default function Home() {
   };
 
   return (
+    <>
+    
     <div className="flex">
+      
       {/* Navbar for displaying sessions */}
       <Navbar sessions={sessions} onSelectSession={handleSelectSession} />
 
@@ -67,6 +70,6 @@ export default function Home() {
           <CalculatorComponent />
         )}
       </div>
-    </div>
+    </div></>
   );
 }
