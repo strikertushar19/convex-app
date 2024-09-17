@@ -79,7 +79,6 @@ export default function CalculatorComponent() {
 
         expression = replaceMathFunctions(expression);
 
-
         setCalculation(eval(expression).toString());
       } catch (err) {
         console.error("Error evaluating expression:", err);
@@ -88,109 +87,164 @@ export default function CalculatorComponent() {
     } else if (button === "C") {
       setCalculation("");
     } else if (button === "del") {
-      setCalculation((prev) => prev.slice(0, -1)); 
+      setCalculation((prev) => prev.slice(0, -1));
     } else if (button === "deg" || button === "rad") {
       setAngleUnit(button as "deg" | "rad");
+      setCalculation((prev) => prev + button);
+    } else {
+      // Update the calculation string by appending the button value
       setCalculation((prev) => prev + button);
     }
   };
 
   return (
     <>
-    <div className="text-4xl text-center p-8 rounded-2xl bg-slate-400">Personal Scientific Calculator with notes <h1 className="text-lg">-By Tushar 😀</h1></div>
-      <div className="flex justify-between border-2h-screen">
-        <div className="note-section">
+      <div className="text-4xl text-center p-8 rounded-2xl bg-slate-400">
+        Personal Scientific Calculator with notes
+        <h1 className="text-lg">- By Tushar 😀</h1>
+      </div>
+      <div className="flex justify-between border-2 h-screen">
+        <div className="note-section w-1/3 p-4">
           <textarea
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Write your notes here..."
+            className="w-full h-48 p-2 border-2 border-gray-300 rounded"
           />
-          <button onClick={handleSave} className="bg-blue-600 rounded-2xl  text-white p-4">Save Session</button>
-
-    
+          <button
+            onClick={handleSave}
+            className="bg-blue-600 rounded-2xl text-white p-4 mt-4"
+          >
+            Save Session
+          </button>
         </div>
 
-        <div className="border-8 border-black p-8">
-          <div className=" ">
-            <div className="display border-2 border-red-600">
-              <input type="text" value={calculation} readOnly />
-            </div>
-            <div className="buttons">
-              {/* Basic arithmetic */}
-              {["7", "8", "9", "/"].map((button) => (
-                <button
-                  key={button}
-                  onClick={() => handleCalculatorButton(button)}
-                >
-                  {button}
-                </button>
-              ))}
-              {["4", "5", "6", "*"].map((button) => (
-                <button
-                  key={button}
-                  onClick={() => handleCalculatorButton(button)}
-                >
-                  {button}
-                </button>
-              ))}
-              {["1", "2", "3", "-"].map((button) => (
-                <button
-                  key={button}
-                  onClick={() => handleCalculatorButton(button)}
-                >
-                  {button}
-                </button>
-              ))}
-              {["0", ".", "=", "+"].map((button) => (
-                <button
-                  key={button}
-                  onClick={() => handleCalculatorButton(button)}
-                >
-                  {button}
-                </button>
-              ))}
-              <button onClick={() => handleCalculatorButton("C")}>Clear</button>
-              <button onClick={() => handleCalculatorButton("del")}>
-                Delete
+        <div className="calculator w-2/3 border-8 border-black p-8">
+          <div className="display border-2 border-red-600 p-2 mb-4">
+            <input
+              type="text"
+              value={calculation}
+              readOnly
+              className="w-full h-12 text-right px-2"
+            />
+          </div>
+          <div className="buttons grid grid-cols-4 gap-2">
+            {/* Basic arithmetic */}
+            {["7", "8", "9", "/"].map((button) => (
+              <button
+                key={button}
+                onClick={() => handleCalculatorButton(button)}
+                className="p-4 border rounded"
+              >
+                {button}
               </button>
-
-              {/* Trigonometric functions */}
-              {["sin", "cos", "tan", "asin", "acos", "atan"].map((func) => (
-                <button
-                  key={func}
-                  onClick={() => handleCalculatorButton(func + "(")}
-                >
-                  {func}
-                </button>
-              ))}
-
-              {/* Logarithmic and exponential functions */}
-              {["log", "log10", "exp", "sqrt", "pow"].map((func) => (
-                <button
-                  key={func}
-                  onClick={() => handleCalculatorButton(func + "(")}
-                >
-                  {func}
-                </button>
-              ))}
-
-              <button onClick={() => handleCalculatorButton("!")}>!</button>
-              <button onClick={() => handleCalculatorButton("pi")}>π</button>
-              <button onClick={() => handleCalculatorButton(",")}>,</button>
-
-              <button onClick={() => handleCalculatorButton("deg")}>
-                Degrees
+            ))}
+            {["4", "5", "6", "*"].map((button) => (
+              <button
+                key={button}
+                onClick={() => handleCalculatorButton(button)}
+                className="p-4 border rounded"
+              >
+                {button}
               </button>
-              <button onClick={() => handleCalculatorButton("rad")}>
-                Radians
+            ))}
+            {["1", "2", "3", "-"].map((button) => (
+              <button
+                key={button}
+                onClick={() => handleCalculatorButton(button)}
+                className="p-4 border rounded"
+              >
+                {button}
               </button>
+            ))}
+            {["0", ".", "=", "+"].map((button) => (
+              <button
+                key={button}
+                onClick={() => handleCalculatorButton(button)}
+                className="p-4 border rounded"
+              >
+                {button}
+              </button>
+            ))}
+            <button
+              onClick={() => handleCalculatorButton("C")}
+              className="col-span-2 p-4 border rounded"
+            >
+              Clear
+            </button>
+            <button
+              onClick={() => handleCalculatorButton("del")}
+              className="col-span-2 p-4 border rounded"
+            >
+              Delete
+            </button>
 
-              <button onClick={() => handleCalculatorButton("1/(")}>1/x</button>
-              <button onClick={() => handleCalculatorButton("%")}>%</button>
+            {/* Trigonometric functions */}
+            {["sin", "cos", "tan", "asin", "acos", "atan"].map((func) => (
+              <button
+                key={func}
+                onClick={() => handleCalculatorButton(func + "(")}
+                className="p-4 border rounded"
+              >
+                {func}
+              </button>
+            ))}
 
-              <button onClick={() => handleCalculatorButton("(")}>(</button>
-              <button onClick={() => handleCalculatorButton(")")}>)</button>
-            </div>
+            {/* Logarithmic and exponential functions */}
+            {["log", "log10", "exp", "sqrt", "pow"].map((func) => (
+              <button
+                key={func}
+                onClick={() => handleCalculatorButton(func + "(")}
+                className="p-4 border rounded"
+              >
+                {func}
+              </button>
+            ))}
+
+            <button
+              onClick={() => handleCalculatorButton("pi")}
+              className="p-4 border rounded"
+            >
+              π
+            </button>
+            <button
+              onClick={() => handleCalculatorButton("1/(")}
+              className="p-4 border rounded"
+            >
+              1/x
+            </button>
+            <button
+              onClick={() => handleCalculatorButton("%")}
+              className="p-4 border rounded"
+            >
+              %
+            </button>
+
+            <button
+              onClick={() => handleCalculatorButton("(")}
+              className="p-4 border rounded"
+            >
+              (
+            </button>
+            <button
+              onClick={() => handleCalculatorButton(")")}
+              className="p-4 border rounded"
+            >
+              )
+            </button>
+
+            <button
+              onClick={() => handleCalculatorButton("deg")}
+              className="p-4 border rounded"
+            >
+              Degrees
+            </button>
+            <button
+              onClick={() => handleCalculatorButton("rad")}
+              className="p-4 border rounded"
+            >
+              Radians
+            </button>
           </div>
         </div>
       </div>
